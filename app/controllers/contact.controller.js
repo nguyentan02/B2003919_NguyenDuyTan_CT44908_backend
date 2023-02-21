@@ -2,14 +2,17 @@ const ContactService = require("../services/contact.service");
 const MongoDB = require("../utils/mongodb.util");
 const ApiError = require("../api-error");
 exports.create = async (req, res, next) => {
+    console.log('jj');
     if (!req.body?.name) {
         return next(new ApiError(400, "Name can not be empty"));
     }
     try {
         const contactService = new ContactService(MongoDB.client);
         const document = await contactService.create(req.body);
+
         return res.send(document);
     } catch (error) {
+        console.log(error);
         return next(
             new ApiError(500, "An error occurred while creating the contact")
         )
@@ -26,6 +29,7 @@ exports.findAll = async (req, res, next) => {
             documents = await contactService.find({});
         }
     } catch (error) {
+        console.log(error);
         return next(
             new ApiError(500, "An error occurred while retrieving contacts")
         );
@@ -81,8 +85,8 @@ exports.delete = async (req, res, next) => {
 exports.deleteAll = async (_req, res, next) => {
     try {
         const contactService = new ContactService(MongoDB.client);
-        const document = await contactService.deleteAll();
-        return res.send({ message: `${this.deleteCount} contacts were deleted seccessfully`, });
+        const deleteCount = await contactService.deleteAll();
+        return res.send({ message: `${deleteCount} contacts were deleted seccessfully`, });
     } catch (error) {
         return next(
             new ApiError(500, "An error occurred while removing all contacts")

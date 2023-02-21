@@ -1,0 +1,30 @@
+@urlDev=http://localhost:3000
+
+### 
+GET {{urlDev}}/api/contacts/
+### 
+POST {{urlDev}}/api/contacts/
+Content-Type: application/json
+
+{
+    "name":"gohohh3g2",
+    "email":"tnanfhhhdfghguye",
+    "address":"ngvhfdglnik",
+    "phone":"3232323hfdg2"
+}
+
+###
+DELETE  {{urlDev}}/api/contacts/
+
+### find contacts by name
+GET {{urlDev}}/api/contacts/?name=hhh
+### find contacts by id 
+GET {{urlDev}}/api/contacts/63ec3cc82a46644c9f81497d
+
+# ### update contacts by id
+# PUT {{urlDev}}/api/contacts/63b6bcb3989834d17e39a293
+# Content-Type: application/json
+
+# {
+#     "name": "ghost updated 2"
+
