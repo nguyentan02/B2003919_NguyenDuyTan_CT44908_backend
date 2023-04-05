@@ -4,8 +4,8 @@ class ContactService {
     constructor(client) {
         this.Contact = client.db().collection("contacts");
     }
-
     extractConactData(payload) {
+        console.log(payload);
         const contact = {
             name: payload.name,
             email: payload.email,
@@ -13,7 +13,6 @@ class ContactService {
             phone: payload.phone,
             favorite: payload.favorite,
         };
-        // Remove undefined fields
         Object.keys(contact).forEach(
             (key) => contact[key] === undefined && delete contact[key]
         );
@@ -39,7 +38,7 @@ class ContactService {
     }
     async update(id, payload) {
         const filter = {
-            _id: ObjectID.isValid(id) ? new ObjectID(id) : null,
+            _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
         };
         const update = this.extractConactData(payload);
         const result = await this.Contact.findOneAndUpdate(
@@ -59,7 +58,7 @@ class ContactService {
     }
     async delete(id) {
         const result = await this.Contact.findOneAndDelete({
-            _id: ObjectID.isValid(id) ? new ObjectID(id) : null,
+            _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
         });
         return result.value;
     }

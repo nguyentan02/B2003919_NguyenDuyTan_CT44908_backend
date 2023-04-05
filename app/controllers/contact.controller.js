@@ -2,14 +2,12 @@ const ContactService = require("../services/contact.service");
 const MongoDB = require("../utils/mongodb.util");
 const ApiError = require("../api-error");
 exports.create = async (req, res, next) => {
-    console.log('jj');
     if (!req.body?.name) {
         return next(new ApiError(400, "Name can not be empty"));
     }
     try {
         const contactService = new ContactService(MongoDB.client);
         const document = await contactService.create(req.body);
-
         return res.send(document);
     } catch (error) {
         console.log(error);
@@ -39,17 +37,17 @@ exports.findAll = async (req, res, next) => {
 exports.findOne = async (req, res, next) => {
     try {
         const contactService = new ContactService(MongoDB.client);
-        const document = await contactService.findByID(req.params.id);
+        const document = await contactService.findById(req.params.id);
         if (!document) {
             return next(new ApiError(404, "Contact not found"));
         }
         return res.send(document);
     } catch (error) {
         return next(
-            new ApiError(500, `Error retrieving contact with id = ${req.params.id}`
-            )
+            new ApiError(500, `Error retrieving contact with id = ${req.params.id}`)
         );
     }
+
 };
 exports.update = async (req, res, next) => {
     if (Object.keys(req.body).length === 0) {

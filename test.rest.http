@@ -7,10 +7,10 @@ POST {{urlDev}}/api/contacts/
 Content-Type: application/json
 
 {
-    "name":"gohohh3g2",
-    "email":"tnanfhhhdfghguye",
-    "address":"ngvhfdglnik",
-    "phone":"3232323hfdg2"
+    "name":"gohohh43432",
+    "email":"tanguyen@gmail",
+    "address":"Can tho",
+    "phone":"3232232"
 }
 
 ###
@@ -19,7 +19,7 @@ DELETE  {{urlDev}}/api/contacts/
 ### find contacts by name
 GET {{urlDev}}/api/contacts/?name=hhh
 ### find contacts by id 
-GET {{urlDev}}/api/contacts/63ec3cc82a46644c9f81497d
+GET http://localhost:3000/api/contacts/6421ba7357c89108a32cd3c9
 
 # ### update contacts by id
 # PUT {{urlDev}}/api/contacts/63b6bcb3989834d17e39a293
